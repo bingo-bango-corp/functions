@@ -11,7 +11,19 @@ const createProfile = (userRecord: any) => {
   return db
     .collection('users')
     .doc(uid)
-    .set({ email, displayName, phoneNumber, photoURL })
+    .set({ displayName, photoURL })
+    .then(() => {
+      return db
+        .collection('users')
+        .doc(uid)
+        .collection('private')
+        .doc('privateProfile')
+        .set({
+          accountName: displayName,
+          email,
+          phoneNumber
+        })
+    })
     .catch(console.error)
 }
 
