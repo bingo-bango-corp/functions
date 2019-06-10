@@ -32,6 +32,7 @@ export default (req: any, res: any) => {
     }
 
     await jobRef.update({
+      state: 'assigned',
       assignee: {
         uid: uid,
         profile: db.collection('users').doc(uid)
