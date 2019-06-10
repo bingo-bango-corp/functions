@@ -6,20 +6,6 @@ export interface BingoMessagePayload {
   url?: string
 }
 
-const sendNotificationToUser = async (uid: string, message: BingoMessagePayload) => {
-  const messageToken = await getTokenForUid(uid)
-  return messaging.send({
-    token: messageToken,
-    notification: {
-      title: message.title,
-      body: message.body
-    },
-    webpush: {
-
-    }
-  })
-}
-
 const getTokenForUid = async (uid: string) => {
   const userRef = db
     .collection('users')
@@ -35,6 +21,20 @@ const getTokenForUid = async (uid: string) => {
   }
 
   return userData.messageToken
+}
+
+const sendNotificationToUser = async (uid: string, message: BingoMessagePayload) => {
+  const messageToken = await getTokenForUid(uid)
+  return messaging.send({
+    token: messageToken,
+    notification: {
+      title: message.title,
+      body: message.body
+    },
+    webpush: {
+
+    }
+  })
 }
 
 export {

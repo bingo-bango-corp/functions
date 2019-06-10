@@ -19,7 +19,7 @@ export default (req: any, res: any) => {
 }
 
 async function getUsers(userIDs: string[]) {
-  let promises: Promise<object>[] = []
+  const promises: Promise<object>[] = []
 
   userIDs.forEach((userID) => {
     promises.push(getUser(userID))
