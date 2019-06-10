@@ -32,7 +32,9 @@ const sendNotificationToUser = async (uid: string, message: BingoMessagePayload)
       body: message.body
     },
     webpush: {
-
+      headers: {
+        Urgency: 'high'
+      }
     }
   })
 }
