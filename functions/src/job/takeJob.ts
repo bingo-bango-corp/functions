@@ -4,7 +4,8 @@ import { sendNotificationToUser } from '../utils/notify'
 
 const sendNotificationToOwner = async (
   ownerId: any,
-  assigneeId: any
+  assigneeId: any,
+  jobId: any
 ) => {
   console.log(`sending notification to ${ownerId}`)
   const assigneeUserInfo = (await db
@@ -15,7 +16,8 @@ const sendNotificationToOwner = async (
   
   await sendNotificationToUser(ownerId, {
     title: `🧙 ${assigneeUserInfo!.displayName} is on it!`,
-    body: 'Your request will be fullfilled soon'
+    body: 'Your request will be fullfilled soon',
+    url: `https://app.bingobango.app/get-things/${jobId}`
   })
 }
 
@@ -63,7 +65,7 @@ export default (req: any, res: any) => {
       }
     })
 
-    sendNotificationToOwner(jobData!.owner.uid, uid).catch(e => {
+    sendNotificationToOwner(jobData!.owner.uid, uid, jobRef.id).catch(e => {
       console.error(e)
     })
 

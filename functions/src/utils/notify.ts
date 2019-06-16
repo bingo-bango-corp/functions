@@ -25,17 +25,14 @@ const getTokenForUid = async (uid: string) => {
 
 const sendNotificationToUser = async (uid: string, message: BingoMessagePayload) => {
   const messageToken = await getTokenForUid(uid)
+  const url = message.url ? message.url : 'https://app.bingobango.app/'
   console.info(`dispatching notification to ${uid}`)
   return messaging.send({
     token: messageToken,
-    notification: {
+    data: {
       title: message.title,
-      body: message.body
-    },
-    webpush: {
-      headers: {
-        Urgency: 'high'
-      }
+      body: message.body,
+      link: url
     }
   })
 }
