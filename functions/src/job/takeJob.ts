@@ -41,9 +41,16 @@ export default (req: any, res: any) => {
       })
     }
 
+    if (jobData!.state !== 'unassigned') {
+      return res.status(400).send({
+        code: 'job/illegal-action',
+        message: 'Cannot assign a job that is not in state unassigned'
+      })
+    }
+
     if (jobData!.owner.uid === uid) {
       return res.status(400).send({
-        code: 'job/cannotTakeOwnJob',
+        code: 'job/cannot-take-own-job',
         message: 'Cannot assign job to its owner'
       })
     }
@@ -56,7 +63,9 @@ export default (req: any, res: any) => {
       }
     })
 
-    await sendNotificationToOwner(jobData!.owner.uid, uid)
+    sendNotificationToOwner(jobData!.owner.uid, uid).catch(e => {
+      console.error(e)
+    })
 
     return res.send({ data: { status: 'OK' }})
   })
