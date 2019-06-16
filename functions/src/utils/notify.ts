@@ -25,6 +25,7 @@ const getTokenForUid = async (uid: string) => {
 
 const sendNotificationToUser = async (uid: string, message: BingoMessagePayload) => {
   const messageToken = await getTokenForUid(uid)
+  console.info(`dispatching notification to ${uid}`)
   return messaging.send({
     token: messageToken,
     notification: {
