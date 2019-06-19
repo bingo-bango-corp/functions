@@ -7,9 +7,9 @@ import dropJob from './job/dropJob'
 import createProfile from './profile/createProfile'
 
 module.exports = {
-  authOnCreate: functions.auth.user().onCreate(createProfile),
-  createChat: functions.https.onRequest(createChat),
-  notifier: functions.firestore.document('jobs/{jobId}/chat/{messageId}').onCreate(notifier),
-  takeJob: functions.https.onRequest(takeJob),
-  dropJob: functions.https.onRequest(dropJob),
+  authOnCreate: functions.region('europe-west1').auth.user().onCreate(createProfile),
+  createChat: functions.region('europe-west1').https.onRequest(createChat),
+  notifier: functions.region('europe-west1').firestore.document('jobs/{jobId}/chat/{messageId}').onCreate(notifier),
+  takeJob: functions.region('europe-west1').https.onRequest(takeJob),
+  dropJob: functions.region('europe-west1').https.onRequest(dropJob),
 }
