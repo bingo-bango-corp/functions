@@ -1,7 +1,8 @@
 const cors = require('cors')({origin: true})
 import { db } from '../admin'
+import { Request, Response } from 'firebase-functions'
 
-export default (req: any, res: any) => {
+export default (req: Request, res: Response) => {
   return cors(req, res, async () => {
     const { userIDs } = req.body.data
     const users: object[] = await getUsers(userIDs)

@@ -1,6 +1,7 @@
 const cors = require('cors')({origin: true})
 import { db } from '../admin'
 import { sendNotificationToUser } from '../utils/notify'
+import { Request, Response } from 'firebase-functions'
 
 const sendNotificationToOwner = async (
   ownerId: any,
@@ -19,7 +20,7 @@ const sendNotificationToOwner = async (
   })
 }
 
-export default (req: any, res: any) => {
+export default (req: Request, res: Response) => {
   return cors(req, res, async () => {
     const { jobID, uid } = req.body.data
     const jobRef = db.collection('jobs').doc(jobID)
