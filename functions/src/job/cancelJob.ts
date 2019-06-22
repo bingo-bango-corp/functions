@@ -43,7 +43,7 @@ export default (req: Request, res: Response) => {
       })
     }
 
-    if (jobData.owner !== uid) {
+    if (jobData.owner.uid !== uid) {
       return res.status(400).send({
         code: 'job/illegal-action',
         message: 'This is not your job'
