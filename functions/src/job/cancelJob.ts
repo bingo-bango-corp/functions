@@ -15,7 +15,7 @@ const sendNotificationToAssignee = async (
     .get())
     .data()
   
-  await sendNotificationToUser(ownerId, {
+  await sendNotificationToUser(assigneeId, {
     title: `${ownerUserInfo!.displayName} just cancelled their request`,
     body: `They no longer want "${thing}".`
   })
