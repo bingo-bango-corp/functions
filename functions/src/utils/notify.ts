@@ -3,7 +3,9 @@ import { messaging, db } from '../admin'
 export interface BingoMessagePayload {
   title: string,
   body: string,
-  url?: string
+  url?: string,
+  type?:
+    'new-chat-message',
 }
 
 const getTokenForUid = async (uid: string) => {
