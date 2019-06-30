@@ -6,6 +6,7 @@ import { Request, Response } from 'firebase-functions'
 const sendNotificationToOwner = async (
   assigneeId: string,
   ownerId: string,
+  jobId: string,
 ) => {
   console.log(`sending notification to ${ownerId}`)
   const assigneeUserInfo = (await db
@@ -16,7 +17,8 @@ const sendNotificationToOwner = async (
   
   await sendNotificationToUser(ownerId, {
     title: `${assigneeUserInfo!.displayName} marked your request as delivered 🧙‍`,
-    body: 'Tap here to confirm delivery'
+    body: 'Tap here to confirm delivery',
+    url: `https://app.bingobango.app/get-things/${jobId}`
   })
 }
 
@@ -53,7 +55,7 @@ export default (req: Request, res: Response) => {
       state: 'delivered',
     })
 
-    sendNotificationToOwner(jobData!.owner.uid, uid).catch((e: Error) => {
+    sendNotificationToOwner(jobData!.owner.uid, uid, jobID).catch((e: Error) => {
       console.error(e)
     })
 
