@@ -2,6 +2,7 @@ const cors = require('cors')({origin: true})
 import { db } from '../admin'
 import { sendNotificationToUser } from '../utils/notify'
 import { Request, Response } from 'firebase-functions'
+import writeNoticeToChat from '../utils/writeNoticeToChat';
 
 const sendNotificationToOwner = async (
   assigneeId: string,
@@ -51,12 +52,16 @@ export default (req: Request, res: Response) => {
       })
     }
 
-    await jobRef.update({
-      state: 'delivered',
-    })
-
     sendNotificationToOwner(jobData!.owner.uid, uid, jobID).catch((e: Error) => {
       console.error(e)
+    })
+
+    writeNoticeToChat('delivered', jobID).catch((e: Error) => {
+      console.error(e)
+    })
+
+    await jobRef.update({
+      state: 'delivered',
     })
 
     return res.send({ data: { status: 'OK' }}) 
