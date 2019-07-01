@@ -50,7 +50,7 @@ export default (req: Request, res: Response) => {
       })
     }
 
-    writeNoticeToChat('confirmed_delivery', jobID).catch((e: Error) => {
+    writeNoticeToChat('confirm_delivery', jobID).catch((e: Error) => {
       console.error(e)
     })
 

@@ -59,7 +59,7 @@ export default (req: Request, res: Response) => {
       })
     }
 
-    writeNoticeToChat('took', jobID).catch((e: Error) => {
+    writeNoticeToChat('assign', jobID).catch((e: Error) => {
       console.error(e)
     })
 

@@ -43,7 +43,7 @@ export default (req: Request, res: Response) => {
       })
     }
 
-    writeNoticeToChat('dropped', jobID).catch((e: Error) => {
+    writeNoticeToChat('drop', jobID).catch((e: Error) => {
       console.error(e)
     })
 

@@ -51,7 +51,7 @@ export default (req: Request, res: Response) => {
       })
     }
 
-    writeNoticeToChat('cancelled', jobID).catch((e: Error) => {
+    writeNoticeToChat('cancel', jobID).catch((e: Error) => {
       console.error(e)
     })
 

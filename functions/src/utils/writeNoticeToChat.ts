@@ -1,11 +1,11 @@
 import { db } from '../admin'
 
 type notice =
-  'took' |
-  'dropped' |
-  'cancelled' |
-  'delivered' |
-  'confirmed_delivery'
+  'assign' |
+  'drop' |
+  'cancel' |
+  'deliver' |
+  'confirm_delivery'
 
 export default async (
   type: notice,
