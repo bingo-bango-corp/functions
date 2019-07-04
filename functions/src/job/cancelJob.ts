@@ -67,6 +67,7 @@ export default (req: Request, res: Response) => {
 
     await jobRef.update({
       state: 'cancelled',
+      terminal: true,
     })
 
     return res.send({ data: { status: 'OK' }}) 

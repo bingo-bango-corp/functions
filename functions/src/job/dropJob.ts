@@ -53,6 +53,7 @@ export default (req: Request, res: Response) => {
 
     await jobRef.update({
       state: 'lost',
+      terminal: true,
     })
 
     return res.send({ data: { status: 'OK' }})
