@@ -5,8 +5,8 @@ import { Request, Response } from 'firebase-functions'
 import writeNoticeToChat from '../utils/writeNoticeToChat';
 
 const sendNotificationToOwner = async (
-  assigneeId: string,
   ownerId: string,
+  assigneeId: string,
   jobId: string,
 ) => {
   console.log(`sending notification to ${ownerId}`)
