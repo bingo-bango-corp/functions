@@ -6,6 +6,7 @@ const sendNotification = async (
   to: string,
   message: string,
   url: string,
+  jobId: string,
 ) => {
   const profileSnapshot = await db
     .collection('users')
@@ -18,7 +19,8 @@ const sendNotification = async (
     title: `${profileData!.displayName} sent a message`,
     body: message,
     url: url,
-    type: 'new-chat-message'
+    type: 'new-chat-message',
+    context: jobId
   })
 }
 
@@ -49,14 +51,16 @@ export default async (snap: FirebaseFirestore.DocumentSnapshot, context: any) =>
       created_by,
       owner.uid,
       message,
-      `https://app.bingobango.app/get-things/${jobId}`
+      `https://app.bingobango.app/get-things/${jobId}`,
+      jobId
     )
   } else {
     await sendNotification(
       created_by,
       assignee.uid,
       message,
-      `https://app.bingobango.app/make-money/current-job`
+      `https://app.bingobango.app/make-money/current-job`,
+      jobId
     )
   }
 }
