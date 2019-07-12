@@ -54,7 +54,7 @@ export default (req: Request, res: Response) => {
       console.error(e)
     })
 
-    sendNotificationToAssignee(uid, jobData!.owner.uid).catch((e: Error) => {
+    sendNotificationToAssignee(jobData!.assignee.uid, jobData!.owner.uid).catch((e: Error) => {
       console.error(e)
     })
 
